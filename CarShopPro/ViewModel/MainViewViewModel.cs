@@ -15,6 +15,9 @@ using CarShopProDB.Tables;
 
 namespace CarShopPro.ViewModel
 {
+    /// <summary>
+    /// Represents a view model for handling the MainView.
+    /// </summary>
     public class MainViewViewModel : INotifyPropertyChanged
     {
         #region INotifyPropertyChanged
@@ -128,6 +131,9 @@ namespace CarShopPro.ViewModel
         private readonly AddToDb _addcommands;
         private readonly RemoveByID _removecommand;
 
+        /// <summary>
+        /// Gets or sets the collection of parts to display in the table.
+        /// </summary>
         public ObservableCollection<Part> PartsTableDisplay
         {
             get => _partsTableDisplay;
@@ -138,6 +144,10 @@ namespace CarShopPro.ViewModel
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the MainViewViewModel class with the specified CarShopProDBContext.
+        /// </summary>
+        /// <param name="context">The CarShopProDBContext to use for database operations.</param>
         public MainViewViewModel(CarShopProDBContext context)
         {
             _context = context;
@@ -155,6 +165,9 @@ namespace CarShopPro.ViewModel
             UpdatePartsTable();
         }
 
+        /// <summary>
+        /// Removes a part from the database based on its ID.
+        /// </summary>
         private void RemovePartFromDb()
         {
             if (!int.TryParse(PartID, out int partId))
@@ -175,6 +188,9 @@ namespace CarShopPro.ViewModel
         public ICommand AddPart { get; set; }
         public ICommand Remove { get; set; }
 
+        /// <summary>
+        /// Adds a new part to the database.
+        /// </summary>
         private void AddPartToDb()
         {
             if (string.IsNullOrWhiteSpace(Desc) || string.IsNullOrWhiteSpace(Name) ||
@@ -210,6 +226,10 @@ namespace CarShopPro.ViewModel
         }
 
         #region RedirectButtons
+
+        /// <summary>
+        /// Shows the UsersTable view.
+        /// </summary>
         private void UsersTableShow()
         {
             var window = new UsersTable();
@@ -217,6 +237,9 @@ namespace CarShopPro.ViewModel
             window.Show();
         }
 
+        /// <summary>
+        /// Shows the CarsTable view.
+        /// </summary>
         private void CarsTableShow()
         {
             var window = new CarsTable();
@@ -224,18 +247,36 @@ namespace CarShopPro.ViewModel
             window.Show();
         }
 
+        /// <summary>
+        /// Shows the CustomersTable view.
+        /// </summary>
         private void CustomersTableShow()
         {
             var window = new CustomersTable();
             Application.Current.MainWindow = window;
             window.Show();
         }
+
+        /// <summary>
+        /// Gets the command to show the UsersTable view.
+        /// </summary>
         public ICommand UsersTable { get; }
+
+        /// <summary>
+        /// Gets the command to show the CarsTable view.
+        /// </summary>
         public ICommand CarsTable { get; }
+
+        /// <summary>
+        /// Gets the command to show the CustomersTable view.
+        /// </summary>
         public ICommand CustomersTable { get;}
 
         #endregion
 
+        /// <summary>
+        /// Updates the collection of parts to display in the table from the database.
+        /// </summary>
         public void UpdatePartsTable()
         {
             var dbtotable = new DbToTableFetch();

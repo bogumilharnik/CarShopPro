@@ -16,6 +16,9 @@ using CarShopProDB.Tables;
 
 namespace CarShopPro.ViewModel
 {
+    /// <summary>
+    /// Represents a view model for handling the UserTable view.
+    /// </summary>
     public class UserTableViewModel : INotifyPropertyChanged
     {
         #region INotifyPropertyChanged
@@ -111,6 +114,10 @@ namespace CarShopPro.ViewModel
         private readonly AddToDb _addcommands;
         private readonly RemoveByID _removecommand;
 
+
+        /// <summary>
+        /// Gets or sets the collection of users to display in the table.
+        /// </summary>
         public ObservableCollection<User> TableDisplay
         {
             get => _partsTableDisplay;
@@ -121,6 +128,10 @@ namespace CarShopPro.ViewModel
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the UserTableViewModel class with the specified CarShopProDBContext.
+        /// </summary>
+        /// <param name="context">The CarShopProDBContext to use for database operations.</param>
         public UserTableViewModel(CarShopProDBContext context)
         {
             _context = context;
@@ -138,6 +149,9 @@ namespace CarShopPro.ViewModel
             UpdateTable();
         }
 
+        /// <summary>
+        /// Removes a user from the database based on their ID.
+        /// </summary>
         private void RemoveFromDb()
         {
             if (!int.TryParse(ID, out int partId))
@@ -155,9 +169,20 @@ namespace CarShopPro.ViewModel
             ID = "";
         }
 
+        /// <summary>
+        /// Gets the command to add a new user to the database.
+        /// </summary>
         public ICommand Add { get; set; }
+
+        /// <summary>
+        /// Gets the command to remove a user from the database.
+        /// </summary>
         public ICommand Remove { get; set; }
 
+
+        /// <summary>
+        /// Adds a new user to the database.
+        /// </summary>
         private void AddElementToDb()
         {
             if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password) ||
@@ -179,6 +204,10 @@ namespace CarShopPro.ViewModel
         }
 
         #region RedirectButtons
+
+        /// <summary>
+        /// Shows the UsersTable view.
+        /// </summary>
         private void UsersTableShow()
         {
             var window = new UsersTable();
@@ -186,6 +215,10 @@ namespace CarShopPro.ViewModel
             window.Show();
         }
 
+
+        /// <summary>
+        /// Shows the CarsTable view.
+        /// </summary>
         private void CarsTableShow()
         {
             var window = new CarsTable();
@@ -193,6 +226,9 @@ namespace CarShopPro.ViewModel
             window.Show();
         }
 
+        /// <summary>
+        /// Shows the CustomersTable view.
+        /// </summary>
         private void CustomersTableShow()
         {
             var window = new CustomersTable();
@@ -205,6 +241,9 @@ namespace CarShopPro.ViewModel
 
         #endregion
 
+        /// <summary>
+        /// Updates the collection of users to display in the table from the database.
+        /// </summary>
         public void UpdateTable()
         {
             var dbtotable = new DbToTableFetch();

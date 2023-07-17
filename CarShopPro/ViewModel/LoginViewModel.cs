@@ -16,6 +16,9 @@ using SQLitePCL;
 
 namespace CarShopPro.ViewModel
 {
+    /// <summary>
+    /// Represents a view model for handling login functionality.
+    /// </summary>
     public class LoginViewModel : INotifyPropertyChanged
     {
 
@@ -71,6 +74,11 @@ namespace CarShopPro.ViewModel
                 }
             }
         }
+
+        /// <summary>
+        /// Initializes a new instance of the LoginViewModel class with the specified CarShopProDBContext.
+        /// </summary>
+        /// <param name="context">The CarShopProDBContext to use for database operations.</param>
         public LoginViewModel(CarShopProDBContext context)
         {
             _context = context;
@@ -78,6 +86,9 @@ namespace CarShopPro.ViewModel
             _authcommands = new AuthenticationCommands(_context);
         }
 
+        /// <summary>
+        /// Handles the login functionality.
+        /// </summary>
         private void Login()
         {
             if (_authcommands.AuthenticateUser(Username, Password))
@@ -97,6 +108,9 @@ namespace CarShopPro.ViewModel
             }
         }
 
+        /// <summary>
+        /// Gets the command to perform login action.
+        /// </summary>
         public ICommand LoginComm { get; }
     }
 }

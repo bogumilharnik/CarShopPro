@@ -15,6 +15,9 @@ using CarShopPro.Views;
 
 namespace CarShopPro.ViewModel
 {
+    /// <summary>
+    /// Represents a view model for displaying a collection of cars in a table.
+    /// </summary>
     public class CarsTableViewModel : INotifyPropertyChanged
     {
             #region INotifyPropertyChanged
@@ -155,6 +158,10 @@ namespace CarShopPro.ViewModel
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the CarsTableViewModel class with the specified CarShopProDBContext.
+        /// </summary>
+        /// <param name="context">The CarShopProDBContext to use for database operations.</param>
         public CarsTableViewModel(CarShopProDBContext context)
         {
             _context = context;
@@ -166,6 +173,9 @@ namespace CarShopPro.ViewModel
             UpdateTable();
         }
 
+        /// <summary>
+        /// Removes a car from the database based on its ID.
+        /// </summary>
         private void RemoveFromDb()
         {
             if (!int.TryParse(ID, out int parsedID))
@@ -186,6 +196,9 @@ namespace CarShopPro.ViewModel
         public ICommand Add { get; set; }
         public ICommand Remove { get; set; }
 
+        /// <summary>
+        /// Adds a new car to the database.
+        /// </summary>
         private void AddElementToDb()
         {
             if (string.IsNullOrWhiteSpace(Brand) || string.IsNullOrWhiteSpace(Model) || string.IsNullOrWhiteSpace(Year) || string.IsNullOrWhiteSpace(Color) || string.IsNullOrWhiteSpace(Price))
@@ -221,6 +234,9 @@ namespace CarShopPro.ViewModel
             UpdateTable();
         }
 
+        /// <summary>
+        /// Updates the collection of cars to display in the table from the database.
+        /// </summary>
         public void UpdateTable()
         {
             var dbtotable = new DbToTableFetch();

@@ -12,12 +12,20 @@ namespace CarShopProDB
         private readonly CarShopProDBContext _context;
         private readonly Random _random;
 
+
+        /// <summary>
+        /// Constructor for DatabaseFiller class.
+        /// </summary>
+        /// <param name="context">The CarShopProDBContext instance.</param>
         public DatabaseFiller(CarShopProDBContext context)
         {
             _context = context;
             _random = new Random();
         }
 
+        /// <summary>
+        /// Seed the database with initial data.
+        /// </summary>
         public void SeedData()
         {
             if (!_context.Users.Any())
@@ -51,6 +59,9 @@ namespace CarShopProDB
             }
         }
 
+        /// <summary>
+        /// Generate random data and populate the Users table.
+        /// </summary>
         private void SeedUsers()
         {
             List<User> users = new List<User>
@@ -79,6 +90,9 @@ namespace CarShopProDB
             _context.SaveChanges();
         }
 
+        /// <summary>
+        /// Generate random data and populate the Cars table.
+        /// </summary>
         private void SeedCars()
         {
             List<Car> cars = new List<Car>
@@ -117,6 +131,9 @@ namespace CarShopProDB
             _context.SaveChanges();
         }
 
+        /// <summary>
+        /// Generate random data and populate the Parts table.
+        /// </summary>
         private void SeedParts()
         {
             List<Part> parts = new List<Part>
@@ -155,6 +172,9 @@ namespace CarShopProDB
             _context.SaveChanges();
         }
 
+        /// <summary>
+        /// Generate random data and populate the Customers table.
+        /// </summary>
         private void SeedCustomers()
         {
             List<Customer> customers = new List<Customer>
@@ -190,6 +210,9 @@ namespace CarShopProDB
             _context.SaveChanges();
         }
 
+        /// <summary>
+        /// Generate random data and populate the Orders table.
+        /// </summary>
         private void SeedOrders()
         {
             List<Order> orders = new List<Order>();
@@ -215,6 +238,9 @@ namespace CarShopProDB
             _context.SaveChanges();
         }
 
+        /// <summary>
+        /// Generate random data and populate the Suppliers table.
+        /// </summary>
         private void SeedSuppliers()
         {
             List<Supplier> suppliers = new List<Supplier>
@@ -252,6 +278,12 @@ namespace CarShopProDB
             _context.SaveChanges();
         }
 
+        /// <summary>
+        /// Get a random entity ID from the given list of entities.
+        /// </summary>
+        /// <typeparam name="T">The type of entity.</typeparam>
+        /// <param name="entities">The list of entities.</param>
+        /// <returns>A random entity ID.</returns>
         private int GetRandomEntityId<T>(List<T> entities)
         {
             int index = _random.Next(entities.Count);

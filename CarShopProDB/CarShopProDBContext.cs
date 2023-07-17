@@ -12,6 +12,10 @@ namespace CarShopProDB
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<User> Users { get; set; }
 
+        /// <summary>
+        /// Configures the model using the given builder.
+        /// </summary>
+        /// <param name="modelBuilder">The builder used to construct the model for this context.</param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Order>()
@@ -51,6 +55,10 @@ namespace CarShopProDB
                 .IsUnique();
         }
 
+        /// <summary>
+        /// Configures the database connection using the provided options builder.
+        /// </summary>
+        /// <param name="optionsBuilder">The options builder for the database connection.</param>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite($"Data Source=CarShopPro.db");

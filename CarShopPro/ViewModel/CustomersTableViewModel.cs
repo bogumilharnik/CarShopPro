@@ -14,6 +14,9 @@ using CarShopProDB.Tables;
 
 namespace CarShopPro.ViewModel
 {
+    /// <summary>
+    /// Represents a view model for displaying a collection of customers in a table.
+    /// </summary>
     public class CustomersTableViewModel : INotifyPropertyChanged
     {
             #region INotifyPropertyChanged
@@ -129,6 +132,9 @@ namespace CarShopPro.ViewModel
         private readonly AddToDb _addcommands;
         private readonly RemoveByID _removecommand;
 
+        /// <summary>
+        /// Gets or sets the collection of customers to display in the table.
+        /// </summary>
         public ObservableCollection<Customer> TableDisplay
         {
             get => _partsTableDisplay;
@@ -139,6 +145,10 @@ namespace CarShopPro.ViewModel
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the CustomersTableViewModel class with the specified CarShopProDBContext.
+        /// </summary>
+        /// <param name="context">The CarShopProDBContext to use for database operations.</param>
         public CustomersTableViewModel(CarShopProDBContext context)
         {
             _context = context;
@@ -150,6 +160,9 @@ namespace CarShopPro.ViewModel
             UpdateTable();
         }
 
+        /// <summary>
+        /// Removes a customer from the database based on its ID.
+        /// </summary>
         private void RemoveFromDb()
         {
             if (!int.TryParse(ID, out int parsedID))
@@ -167,9 +180,20 @@ namespace CarShopPro.ViewModel
             ID = "";
         }
 
+        /// <summary>
+        /// Gets the command to add a new customer to the database.
+        /// </summary>
         public ICommand Add { get; set; }
+
+        /// <summary>
+        /// Gets the command to remove a customer from the database.
+        /// </summary>
         public ICommand Remove { get; set; }
 
+
+        /// <summary>
+        /// Adds a new customer to the database.
+        /// </summary>
         private void AddElementToDb()
         {
             if (string.IsNullOrWhiteSpace(FirstName) || string.IsNullOrWhiteSpace(LastName) || string.IsNullOrWhiteSpace(Email) || string.IsNullOrWhiteSpace(Phone))
@@ -190,6 +214,10 @@ namespace CarShopPro.ViewModel
             UpdateTable();
         }
 
+
+        /// <summary>
+        /// Updates the collection of customers to display in the table from the database.
+        /// </summary>
         public void UpdateTable()
         {
             var dbtotable = new DbToTableFetch();
